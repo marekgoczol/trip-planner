@@ -1,15 +1,71 @@
-<form name="tripPlannerSearch">
-    <select ng-model="from">
-        <option ng-repeat="city in destinations">
-            {{ city }}
-        </option>
-    </select>
+<form name="tripPlannerSearch" style="width: 300px; margin: 0 auto;">
+    <div class="form-group">
+        <label for="city-from">From</label>
+        <select ng-model="from" class="form-control" id="city-from" placeholder="From">
+            <option value="{{ city }}" ng-repeat="city in destinations">
+                {{ city }}
+            </option>
+        </select>
+    </div>
 
-    <select ng-model="to">
-        <option ng-repeat="city in destinations">
-            {{ city }}
-        </option>
-    </select>
+    <div class="form-group">
+        <label for="city-to">To</label>
+        <select ng-model="to" class="form-control" id="city-to" placeholder="From">
+            <option value="{{ city }}" ng-repeat="city in destinations">
+                {{ city }}
+            </option>
+        </select>
+    </div>
 
-    <button ng-click="findCheapest()">find cheapest</button>
+    <div class="form-group">
+        <div class="radio">
+            <label>
+                <input type="radio" name="search-type" ng-model="searchType" id="cheapest" value="cheapest" checked>Cheapest
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="search-type" ng-model="searchType" id="fastest" value="fastest">Fastest
+            </label>
+        </div>
+    </div>
+    
+    <button
+        type="button"
+        class="btn btn-lg btn-success"
+        ng-click="search()"
+    >
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+          Search
+    </button>
+    <br><br>
+    
+    <ul class="list-group">
+        <li ng-repeat="p in path" class="list-group-item clearfix">
+            <div class="row">
+                <div class="col-md-8">
+                    {{ p.from }} <small><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></small> {{ p.to }}
+                    <br>
+                    <small><b>{{ p.transport }}</b> for {{ p.duration.h }}h{{ p.duration.m }}</small>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-right">
+                        &euro; {{ p.cost }}
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item list-group-item-warning clearfix" ng-show="pathDetails">
+            <div class="row">
+                <div class="col-md-8">
+                    <b>Total: {{ pathDetails.totalTime.h }}h{{ pathDetails.totalTime.m }}</b>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-right">
+                        &euro; {{ pathDetails.totalCost }}
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
 </form>

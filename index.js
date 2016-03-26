@@ -7,26 +7,38 @@
 
     tripPlanner.config(function($stateProvider, $urlRouterProvider) {
 
-        $stateProvider.state('search', {
+        $stateProvider.state('root', {
+            abstract: true,
+            resolve: {
+                deals: function(Deals) {
+                    return Deals.get();
+                }
+            }
+        });
+
+        $stateProvider.state('root.search', {
             url: '/search',
             views: {
                 'content@': {
                     template: require('./trip-planner/search.html'),
                     controller: require('./trip-planner/controller.js'),
                     resolve: {
-                        deals: function(Deals) {
-                            return Deals.get();
-                        },
                         destinations: function(deals) {
                             var destinations = [];
 
-                            _.each(deals.deals, function(deal) {
+                            _.each(deals, function(deal) {
                                 if (destinations.indexOf(deal.arrival) === -1) {
                                     destinations.push(deal.arrival);
                                 }
                             });
 
                             return destinations;
+                        },
+                        cheapestGraph: function(Deals, deals, destinations) {
+                            return Deals.createGraph(deals, destinations, true);
+                        },
+                        fastestGraph: function(Deals, deals, destinations) {
+                            return Deals.createGraph(deals, destinations, false);
                         }
                     }
                 }
