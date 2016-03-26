@@ -20,7 +20,7 @@
     <div class="form-group">
         <div class="radio">
             <label>
-                <input type="radio" name="search-type" ng-model="searchType" id="cheapest" value="cheapest" checked>Cheapest
+                <input type="radio" name="search-type" ng-model="searchType" id="cheapest" value="cheapest">Cheapest
             </label>
         </div>
         <div class="radio">
@@ -34,6 +34,7 @@
         type="button"
         class="btn btn-lg btn-success"
         ng-click="search()"
+        ng-disabled="from === to"
     >
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
           Search

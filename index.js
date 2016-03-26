@@ -26,7 +26,7 @@
                         destinations: function(deals) {
                             var destinations = [];
 
-                            _.each(deals, function(deal) {
+                            angular.forEach(deals, function(deal) {
                                 if (destinations.indexOf(deal.arrival) === -1) {
                                     destinations.push(deal.arrival);
                                 }

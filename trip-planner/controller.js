@@ -1,5 +1,6 @@
 module.exports = function($scope, Deals, destinations, deals, cheapestGraph, fastestGraph) {
     $scope.destinations = destinations;
+    $scope.searchType = 'cheapest';
 
     $scope.search = function() {
         var path;
@@ -30,4 +31,3 @@ module.exports = function($scope, Deals, destinations, deals, cheapestGraph, fas
     };
 
 };
-

@@ -27,7 +27,7 @@
                         destinations: function(deals) {
                             var destinations = [];
 
-                            _.each(deals, function(deal) {
+                            angular.forEach(deals, function(deal) {
                                 if (destinations.indexOf(deal.arrival) === -1) {
                                     destinations.push(deal.arrival);
                                 }
@@ -53,6 +53,7 @@
 },{"./trip-planner/controller.js":2,"./trip-planner/deals-service.js":3,"./trip-planner/search.html":4}],2:[function(require,module,exports){
 module.exports = function($scope, Deals, destinations, deals, cheapestGraph, fastestGraph) {
     $scope.destinations = destinations;
+    $scope.searchType = 'cheapest';
 
     $scope.search = function() {
         var path;
@@ -83,7 +84,6 @@ module.exports = function($scope, Deals, destinations, deals, cheapestGraph, fas
     };
 
 };
-
 
 },{}],3:[function(require,module,exports){
 module.exports = function($http) {
@@ -237,6 +237,6 @@ module.exports = function($http) {
 };
 
 },{}],4:[function(require,module,exports){
-module.exports = "<form name=\"tripPlannerSearch\" style=\"width: 300px; margin: 0 auto;\"><div class=\"form-group\"> <label for=\"city-from\">From</label> <select ng-model=\"from\" class=\"form-control\" id=\"city-from\" placeholder=\"From\"><option value=\"{{ city }}\" ng-repeat=\"city in destinations\"> {{ city }}</option></select></div><div class=\"form-group\"> <label for=\"city-to\">To</label> <select ng-model=\"to\" class=\"form-control\" id=\"city-to\" placeholder=\"From\"><option value=\"{{ city }}\" ng-repeat=\"city in destinations\"> {{ city }}</option></select></div><div class=\"form-group\"><div class=\"radio\"> <label><input type=\"radio\" name=\"search-type\" ng-model=\"searchType\" id=\"cheapest\" value=\"cheapest\" checked>Cheapest</label></div><div class=\"radio\"> <label><input type=\"radio\" name=\"search-type\" ng-model=\"searchType\" id=\"fastest\" value=\"fastest\">Fastest</label></div></div> <button type=\"button\" class=\"btn btn-lg btn-success\" ng-click=\"search()\"><span class=\"glyphicon glyphicon-search\" aria-hidden=\"true\"></span> Search</button><br><br><ul class=\"list-group\"><li ng-repeat=\"p in path\" class=\"list-group-item clearfix\"><div class=\"row\"><div class=\"col-md-8\"> {{ p.from }}<small><span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span></small> {{ p.to }}<br> <small><b>{{ p.transport }}</b> for {{ p.duration.h }}h{{ p.duration.m }}</small></div><div class=\"col-md-4\"><div class=\"text-right\"> &euro; {{ p.cost }}</div></div></div></li><li class=\"list-group-item list-group-item-warning clearfix\" ng-show=\"pathDetails\"><div class=\"row\"><div class=\"col-md-8\"> <b>Total: {{ pathDetails.totalTime.h }}h{{ pathDetails.totalTime.m }}</b></div><div class=\"col-md-4\"><div class=\"text-right\"> &euro; {{ pathDetails.totalCost }}</div></div></div></li></ul></form>";
+module.exports = "<form name=\"tripPlannerSearch\" style=\"width: 300px; margin: 0 auto;\"><div class=\"form-group\"> <label for=\"city-from\">From</label> <select ng-model=\"from\" class=\"form-control\" id=\"city-from\" placeholder=\"From\"><option value=\"{{ city }}\" ng-repeat=\"city in destinations\"> {{ city }}</option></select></div><div class=\"form-group\"> <label for=\"city-to\">To</label> <select ng-model=\"to\" class=\"form-control\" id=\"city-to\" placeholder=\"From\"><option value=\"{{ city }}\" ng-repeat=\"city in destinations\"> {{ city }}</option></select></div><div class=\"form-group\"><div class=\"radio\"> <label><input type=\"radio\" name=\"search-type\" ng-model=\"searchType\" id=\"cheapest\" value=\"cheapest\">Cheapest</label></div><div class=\"radio\"> <label><input type=\"radio\" name=\"search-type\" ng-model=\"searchType\" id=\"fastest\" value=\"fastest\">Fastest</label></div></div> <button type=\"button\" class=\"btn btn-lg btn-success\" ng-click=\"search()\" ng-disabled=\"from === to\"><span class=\"glyphicon glyphicon-search\" aria-hidden=\"true\"></span> Search</button><br><br><ul class=\"list-group\"><li ng-repeat=\"p in path\" class=\"list-group-item clearfix\"><div class=\"row\"><div class=\"col-md-8\"> {{ p.from }}<small><span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span></small> {{ p.to }}<br> <small><b>{{ p.transport }}</b> for {{ p.duration.h }}h{{ p.duration.m }}</small></div><div class=\"col-md-4\"><div class=\"text-right\"> &euro; {{ p.cost }}</div></div></div></li><li class=\"list-group-item list-group-item-warning clearfix\" ng-show=\"pathDetails\"><div class=\"row\"><div class=\"col-md-8\"> <b>Total: {{ pathDetails.totalTime.h }}h{{ pathDetails.totalTime.m }}</b></div><div class=\"col-md-4\"><div class=\"text-right\"> &euro; {{ pathDetails.totalCost }}</div></div></div></li></ul></form>";
 
 },{}]},{},[1]);
