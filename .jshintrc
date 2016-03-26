@@ -1,0 +1,13 @@
+{
+  "undef": true,
+  "globals": {
+    "window": false,
+    "document": false,
+    "console": false,
+    "__dirname": false,
+    "require": false,
+    "module": false,
+    "_": false,
+    "angular": false
+  }
+}

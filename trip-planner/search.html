@@ -1,0 +1,15 @@
+<form name="tripPlannerSearch">
+    <select ng-model="from">
+        <option ng-repeat="city in destinations">
+            {{ city }}
+        </option>
+    </select>
+
+    <select ng-model="to">
+        <option ng-repeat="city in destinations">
+            {{ city }}
+        </option>
+    </select>
+
+    <button ng-click="findCheapest()">find cheapest</button>
+</form>
